@@ -9,4 +9,4 @@ const productSchema = new mongoose.Schema({
     timestamps: true //for createdAt and updatedAt
 });
 
-module.exports = mongoose.Schema('Product', productSchema);
+module.exports = mongoose.model('Product', productSchema);
