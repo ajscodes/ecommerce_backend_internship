@@ -3,22 +3,27 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const userRoutes = require('./routes/userRoutes');
-const productRoutes = require('./routes/productRoutes');
-const orderRoutes = require('./routes/orderRoutes');
-const { errorHandler } = require('./middleware/errorHandler');
-
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+const userRoutes = require('./routes/userRoutes');
+const productRoutes = require('./routes/productRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+const { errorHandler } = require('./middleware/errorHandler');
 
 //Database Connection
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('MongoDB connected'))
     .catch((err) => console.log('MongoDB connection eroor: ',err));
 
-//Default route
+//Routes
+app.use('/api/users', userRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/orders', orderRoutes);
+
+//Root
 app.get('/', (req,res) => res.send('API is working'));
 
 app.use(errorHandler);
