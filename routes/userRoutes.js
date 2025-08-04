@@ -8,3 +8,4 @@ router.post('/login', loginUser);
 router.get('/profile', protect, getUserProfile);
 
 module.exports = router;
+
