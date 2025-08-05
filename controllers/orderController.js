@@ -38,3 +38,23 @@ exports.getOrderById = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.cancelOrder = async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) return res.status(404).json({ message: 'Order not found' });
+    
+    if (String(order.user_id) !== req.user.userId)
+      return res.status(401).json({ message: 'Not authorized' });
+    
+    if (order.status === 'delivered' || order.status === 'shipped')
+      return res.status(400).json({ message: 'Cannot cancel order that is already shipped or delivered' });
+    
+    order.status = 'cancelled';
+    await order.save();
+    
+    res.json({ message: 'Order cancelled successfully', order });
+  } catch (err) {
+    next(err);
+  }
+};

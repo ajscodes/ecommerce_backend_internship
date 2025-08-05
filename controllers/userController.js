@@ -64,3 +64,29 @@ exports.getUserProfile = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.updateUserProfile = async (req, res, next) => {
+  try {
+    const { username, email, address } = req.body;
+    const user = await User.findById(req.user.userId);
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    if (username) user.username = username;
+    if (email) user.email = email;
+    if (address) user.address = address;
+
+    await user.save();
+    
+    res.json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      address: user.address
+    });
+  } catch (err) {
+    next(err);
+  }
+};
