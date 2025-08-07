@@ -15,7 +15,7 @@ const { errorHandler } = require('./middleware/errorHandler');
 
 //Database Connection
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('MongoDB connected'))
+    .then(() => console.log('MongoDB connected successfully'))
     .catch((err) => console.log('MongoDB connection eroor: ',err));
 
 //Routes

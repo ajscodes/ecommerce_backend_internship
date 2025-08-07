@@ -9,7 +9,7 @@ const orderItemSchema = new mongoose.Schema({
 const orderSchema = new mongoose.Schema({
     user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     total_amount: { type: Number, required: true },
-    status: { type: String, enum: ['pending', 'paid', 'shipped', 'delivered'], default: 'pending' },
+    status: { type: String, enum: ['pending', 'paid', 'shipped', 'delivered', 'cancelled'], default: 'pending' },
     order_items: [orderItemSchema]
 }, {
     timestamps: true
