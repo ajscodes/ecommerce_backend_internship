@@ -191,16 +191,6 @@ To test the API endpoints, you can use Postman or any API testing tool. Make sur
 3. Use the token in the Authorization header for protected routes
 4. Create an admin user by manually setting `isAdmin: true` in the database
 
-## Deployment
-
-The application can be deployed to platforms like:
-- Heroku
-- Vercel
-- Railway
-- DigitalOcean
-
-Make sure to set the environment variables in your deployment platform.
-
 ## License
 
 ISC 
